@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity() {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.activity_main)
 
+
             if (processBundle()) {
                 val handler = Handler(Looper.getMainLooper())
                 handler.postDelayed( {  grantPermissions() }, 200)
