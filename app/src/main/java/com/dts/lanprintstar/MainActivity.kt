@@ -64,7 +64,6 @@ class MainActivity : AppCompatActivity() {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.activity_main)
 
-
             if (processBundle()) {
                 val handler = Handler(Looper.getMainLooper())
                 handler.postDelayed( {  grantPermissions() }, 200)
@@ -72,7 +71,7 @@ class MainActivity : AppCompatActivity() {
                 msgclose("Falta parámetro de impresión")
             }
         } catch (e:Exception) {
-            msgclose(object : Any() {}.javaClass.enclosingMethod.name+". "+e.message)
+            msgclose(object : Any() {}.javaClass.enclosingMethod.name+".(1) "+e.message)
         }
     }
 
@@ -98,8 +97,11 @@ class MainActivity : AppCompatActivity() {
             } else {
                 impresionTexto()
             }
+
+
         } catch (e: Exception) {
-            errline.add(object : Any() {}.javaClass.enclosingMethod.name+" . "+e.message+"\n")
+            errline.add(object : Any() {}.javaClass.enclosingMethod.name+" .(0) "+e.message+"\n")
+            //msgclose(object : Any() {}.javaClass.enclosingMethod.name+" .(0) "+e.message)
         }
     }
 
@@ -127,7 +129,7 @@ class MainActivity : AppCompatActivity() {
             procesaImpresionComanda()
 
         } catch (e: Exception) {
-            msgclose(object : Any() {}.javaClass.enclosingMethod.name+" . "+e.message)
+            msgclose(object : Any() {}.javaClass.enclosingMethod.name+" .(2) "+e.message)
             return
         }
     }
@@ -140,7 +142,7 @@ class MainActivity : AppCompatActivity() {
                msgclose("No se pudo leer archivo de impresión")
            }
         } catch (e: Exception) {
-            msgclose(object : Any() {}.javaClass.enclosingMethod.name+" . "+e.message)
+            msgclose(object : Any() {}.javaClass.enclosingMethod.name+" .(3) "+e.message)
         }
     }
 
@@ -158,7 +160,7 @@ class MainActivity : AppCompatActivity() {
                 exitApp()
             }
         } catch (e: Exception) {
-            errline.add(object : Any() {}.javaClass.enclosingMethod.name+" . "+e.message+"\n")
+            errline.add(object : Any() {}.javaClass.enclosingMethod.name+" .(1) "+e.message+"\n")
         }
     }
 
@@ -189,7 +191,7 @@ class MainActivity : AppCompatActivity() {
 
             return true
         } catch (e: Exception) {
-            errline.add(object : Any() {}.javaClass.enclosingMethod.name+" . "+e.message)
+            errline.add(object : Any() {}.javaClass.enclosingMethod.name+" .(2) "+e.message)
             return false
         }
     }
@@ -250,16 +252,18 @@ class MainActivity : AppCompatActivity() {
                     if (jobcancel) {
                         msgclose("La impresora no está conectada: "+mac)
                     } else {
-                        errline.add(object : Any() {}.javaClass.enclosingMethod.name+" . "+e.message+"\n")
+                        errline.add(object : Any() {}.javaClass.enclosingMethod.name+" .(4) "+e.message+"\n")
                     }
                 }
             }
         } catch (e: Exception) {
-            errline.add(object : Any() {}.javaClass.enclosingMethod.name+" . "+e.message+"\n")
+            errline.add(object : Any() {}.javaClass.enclosingMethod.name+" .(5) "+e.message+"\n")
         }
     }
 
     //endregion
+
+    // region Texto
 
     fun cargaTexto() : Boolean {
         try {
@@ -299,7 +303,7 @@ class MainActivity : AppCompatActivity() {
 
             return true
         } catch (e: Exception) {
-            errline.add(object : Any() {}.javaClass.enclosingMethod.name+" . "+e.message)
+            errline.add(object : Any() {}.javaClass.enclosingMethod.name+" .(6) "+e.message)
             return false
         }
     }
@@ -364,16 +368,16 @@ class MainActivity : AppCompatActivity() {
                     if (jobcancel) {
                         msgclose("La impresora no está conectada: "+mac)
                     } else {
-                        errline.add(object : Any() {}.javaClass.enclosingMethod.name+" . "+e.message+"\n")
+                        errline.add(object : Any() {}.javaClass.enclosingMethod.name+" .(8) "+e.message+"\n")
                     }
                 }
             }
         } catch (e: Exception) {
-            errline.add(object : Any() {}.javaClass.enclosingMethod.name+" . "+e.message+"\n")
+            errline.add(object : Any() {}.javaClass.enclosingMethod.name+" .(9) "+e.message+"\n")
         }
     }
 
-    //endregion region Texto
+    //endregion
 
     //region Permission
 
@@ -385,7 +389,7 @@ class MainActivity : AppCompatActivity() {
                 ActivityCompat.requestPermissions(this,arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),1)
             }
         } catch (e: java.lang.Exception) {
-            toastlong(object : Any() {}.javaClass.enclosingMethod.name + " . " + e.message)
+            toastlong(object : Any() {}.javaClass.enclosingMethod.name + " .(gp) " + e.message)
         }
     }
 
@@ -409,7 +413,7 @@ class MainActivity : AppCompatActivity() {
             intent.data = Uri.parse("package:${applicationContext.packageName}")
             startActivity(intent)
         } catch (ex: java.lang.Exception) {
-            msgclose(ex.message!!)
+            msgclose("(4). "+ex.message!!)
         }
     }
 
